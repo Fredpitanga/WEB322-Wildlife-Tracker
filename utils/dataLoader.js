@@ -40,37 +40,6 @@ async function loadSightings() {
     }
 }
 
-/**
- * Alternative implementation using .then().catch() instead of async/await
- * Uncomment if you prefer this approach:
- */
-/*
-function loadSightings() {
-    const filePath = path.join(__dirname, '..', 'data', 'sightings.json');
-    
-    return fs.readFile(filePath, 'utf-8')
-        .then(dataString => {
-            const data = JSON.parse(dataString);
-            
-            if (data && Array.isArray(data.sightings)) {
-                console.log(`Successfully loaded ${data.sightings.length} sightings`);
-                return data.sightings;
-            } else {
-                throw new Error('Invalid data structure: sightings array not found');
-            }
-        })
-        .catch(error => {
-            console.error('Error loading sightings data:', error.message);
-            
-            if (error.code === 'ENOENT') {
-                throw new Error('Sightings data file not found. Please ensure sightings.json exists in the data folder.');
-            } else if (error instanceof SyntaxError) {
-                throw new Error('Invalid JSON format in sightings.json file.');
-            } else {
-                throw new Error(`Failed to load sightings data: ${error.message}`);
-            }
-        });
-}
-*/
+
 
 module.exports = { loadSightings };
