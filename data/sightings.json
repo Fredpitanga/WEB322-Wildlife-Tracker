@@ -1,0 +1,76 @@
+{
+  "sightings": [
+    {
+      "id": 1,
+      "species": "Bald Eagle",
+      "date": "2024-01-15",
+      "location": "Algonquin Park",
+      "habitat": "forest",
+      "verified": true,
+      "notes": "Spotted near the lake shoreline"
+    },
+    {
+      "id": 2,
+      "species": "Moose",
+      "date": "2024-01-10",
+      "location": "Banff National Park",
+      "habitat": "forest",
+      "verified": true,
+      "notes": "Large male moose crossing the road"
+    },
+    {
+      "id": 3,
+      "species": "Red Fox",
+      "date": "2024-01-05",
+      "location": "Toronto Ravines",
+      "habitat": "urban",
+      "verified": false,
+      "notes": "Possibly a domestic dog"
+    },
+    {
+      "id": 4,
+      "species": "Golden Eagle",
+      "date": "2024-01-20",
+      "location": "Rocky Mountains",
+      "habitat": "mountain",
+      "verified": true,
+      "notes": "Soaring above the peaks"
+    },
+    {
+      "id": 5,
+      "species": "Beaver",
+      "date": "2024-01-18",
+      "location": "Ottawa River",
+      "habitat": "wetlands",
+      "verified": true,
+      "notes": "Building a dam near the shore"
+    },
+    {
+      "id": 6,
+      "species": "Black Bear",
+      "date": "2024-01-12",
+      "location": "Bruce Peninsula",
+      "habitat": "forest",
+      "verified": true,
+      "notes": "Foraging for berries"
+    },
+    {
+      "id": 7,
+      "species": "Great Horned Owl",
+      "date": "2024-01-22",
+      "location": "Rural Ontario",
+      "habitat": "forest",
+      "verified": false,
+      "notes": "Heard hooting at night"
+    },
+    {
+      "id": 8,
+      "species": "White-tailed Deer",
+      "date": "2024-01-25",
+      "location": "Caledon Hills",
+      "habitat": "forest",
+      "verified": true,
+      "notes": "Group of 3 deer grazing"
+    }
+  ]
+}

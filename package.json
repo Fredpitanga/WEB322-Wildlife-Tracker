@@ -1,0 +1,19 @@
+{
+  "name": "wildlife-tracker",
+  "version": "1.0.0",
+  "description": "WEB322 Assignment 1 - Wildlife Sighting Tracker",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["wildlife", "tracker", "express", "api"],
+  "author": "Your Name Here",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

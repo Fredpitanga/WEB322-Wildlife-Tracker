@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Sighting Tracker</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+   
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Wildlife Sighting Tracker</h1>
+            <p class="subtitle">By Fred da Silveira Pitanga Filho</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#project">Project</a></li>
+                <li><a href="#api">API Endpoints</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about" class="card">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="photo-container">
+                    <img src="/public/images/IMG_7815.PNG" alt="Fred da Silveira Pitanga Filho" class="profile-photo">
+                </div>
+                <div class="personal-info">
+                    <h3>Personal Information</h3>
+                    <ul>
+                        <li><strong>Name:</strong> Fred da Silveira Pitanga Filho</li>
+                        <li><strong>Student ID:</strong> 154169213</li>
+                        <li><strong>Major:</strong> Computer Programming</li>
+                        <li><strong>Interests:</strong> music, tech related subjects, fitness, fashion</li>
+                        <li><strong>Hobbies:</strong> Music production, Gym, play piano, writing poetry</li>
+                    </ul>
+                    <p class="bio">
+                        I'm passionate about web development because it allows me to combine tech kills with creativity. 
+                        I believe technology can be ua great support  toi environmental causes, which is why I chose 
+                        to build this wildlife tracking application.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="project" class="card">
+            <h2>Project Description</h2>
+            <div class="project-description">
+                <p>
+                    The <strong>Wildlife Sighting Tracker</strong> is a web application built with Express.js that allows users to 
+                    manage and explore wildlife observation data. This application serves as a digital logbook for wildlife 
+                    enthusiasts, researchers, and conservationists to record and analyze animal sightings.
+                </p>
+                <div class="features">
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>View all wildlife sightings in a structured format</li>
+                        <li>Filter verified vs unverified sightings</li>
+                        <li>Search for specific species (like eagles)</li>
+                        <li>Filter sightings by habitat (forest, wetlands, etc.)</li>
+                        <li>Get statistics and counts for different categories</li>
+                        <li>View recent sightings with timestamps</li>
+                    </ul>
+                </div>
+                <p class="tech-stack">
+                    <strong>Built with:</strong> Node.js, Express.js, HTML5, CSS3, JavaScript (ES6+), Vercel for deployment
+                </p>
+            </div>
+        </section>
+
+        <section id="api" class="card">
+            <h2>API Endpoints</h2>
+            <p class="api-intro">The following RESTful API endpoints are available for accessing wildlife sighting data:</p>
+            
+            <div class="api-endpoints">
+                <div class="endpoint">
+                    <h3><span class="method get">GET</span> <code>/api/sightings</code></h3>
+                    <p>Returns all wildlife sighting records in the database.</p>
+                </div>
+                
+                <div class="endpoint">
+                    <h3><span class="method get">GET</span> <code>/api/sightings/verified</code></h3>
+                    <p>Filters and returns only verified sightings (where verified is true).</p>
+                </div>
+                
+                <div class="endpoint">
+                    <h3><span class="method get">GET</span> <code>/api/sightings/species-list</code></h3>
+                    <p>Extracts and returns an array of unique species names.</p>
+                </div>
+                
+                <div class="endpoint">
+                    <h3><span class="method get">GET</span> <code>/api/sightings/habitat/forest</code></h3>
+                    <p>Returns all sightings from FOREST habitat with count statistics.</p>
+                </div>
+                
+                <div class="endpoint">
+                    <h3><span class="method get">GET</span> <code>/api/sightings/search/eagle</code></h3>
+                    <p>Finds the first sighting where species name contains "eagle" (case-insensitive).</p>
+                </div>
+                
+                <div class="endpoint">
+                    <h3><span class="method get">GET</span> <code>/api/sightings/find-index/moose</code></h3>
+                    <p>Finds the index position of the sighting with species "Moose".</p>
+                </div>
+                
+                <div class="endpoint">
+                    <h3><span class="method get">GET</span> <code>/api/sightings/recent</code></h3>
+                    <p>Returns the 3 most recent sightings with formatted date information.</p>
+                </div>
+            </div>
+            
+            <div class="api-test">
+                <h3><i class="fas fa-vial"></i> Test the API</h3>
+                <p>Click the buttons below to test the API endpoints:</p>
+                <div class="test-buttons">
+                    <button onclick="testAPI('/api/sightings')">All Sightings</button>
+                    <button onclick="testAPI('/api/sightings/verified')">Verified Only</button>
+                    <button onclick="testAPI('/api/sightings/species-list')">Species List</button>
+                    <button onclick="testAPI('/api/sightings/habitat/forest')">Forest Habitat</button>
+                </div>
+                <div id="api-response" class="api-response">
+                    <p>Response will appear here...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p><i class="fas fa-copyright"></i> <span id="current-year"></span> Your Name Here - Wildlife Sighting Tracker</p>
+            <p class="date">Assignment 1 - WEB322</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // API Testing Function
+        async function testAPI(endpoint) {
+            const responseDiv = document.getElementById('api-response');
+            responseDiv.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Loading...</p>';
+            
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                
+                responseDiv.innerHTML = `
+                    <h4>${endpoint}</h4>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                responseDiv.innerHTML = `
+                    <h4>Error</h4>
+                    <p class="error">Failed to fetch data from ${endpoint}</p>
+                    <p>${error.message}</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
