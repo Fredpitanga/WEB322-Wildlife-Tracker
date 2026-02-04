@@ -6,7 +6,7 @@
  * https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
  *
  * Name: Fred da Silveira Pitanga Filho
- * Student ID:  154169213
+ * Student ID: 154169213
  * Date: feb 4, 2026
  *
  ***********************************************************************/
@@ -18,7 +18,6 @@ const { loadSightings } = require('./utils/dataLoader');
 
 // Initialize Express app
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // 1. Middleware to serve static files from public folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -54,10 +53,7 @@ app.get('/api/sightings', async (req, res) => {
 app.get('/api/sightings/verified', async (req, res) => {
     try {
         const sightings = await loadSightings();
-        
-        // Using .filter() with arrow function as required
         const verifiedSightings = sightings.filter(sighting => sighting.verified === true);
-        
         res.json(verifiedSightings);
     } catch (error) {
         handleRouteError(res, error, '/api/sightings/verified');
@@ -68,13 +64,8 @@ app.get('/api/sightings/verified', async (req, res) => {
 app.get('/api/sightings/species-list', async (req, res) => {
     try {
         const sightings = await loadSightings();
-        
-        // Using .map() with arrow function as required
         const allSpecies = sightings.map(sighting => sighting.species);
-        
-        // Remove duplicates using Set
         const uniqueSpecies = [...new Set(allSpecies)];
-        
         res.json(uniqueSpecies);
     } catch (error) {
         handleRouteError(res, error, '/api/sightings/species-list');
@@ -85,19 +76,14 @@ app.get('/api/sightings/species-list', async (req, res) => {
 app.get('/api/sightings/habitat/forest', async (req, res) => {
     try {
         const sightings = await loadSightings();
-        
-        // Using .filter() with arrow function as required
         const forestSightings = sightings.filter(sighting => 
             sighting.habitat.toLowerCase() === "forest"
         );
-        
-        // Create response object with required structure
         const response = {
             habitat: "forest",
             sightings: forestSightings,
-            count: forestSightings.length  // Count of sighting records
+            count: forestSightings.length
         };
-        
         res.json(response);
     } catch (error) {
         handleRouteError(res, error, '/api/sightings/habitat/forest');
@@ -108,12 +94,9 @@ app.get('/api/sightings/habitat/forest', async (req, res) => {
 app.get('/api/sightings/search/eagle', async (req, res) => {
     try {
         const sightings = await loadSightings();
-        
-        // Using .find() with arrow function as required
         const eagleSighting = sightings.find(sighting => 
             sighting.species.toLowerCase().includes("eagle")
         );
-        
         res.json(eagleSighting || { message: "No eagle sighting found" });
     } catch (error) {
         handleRouteError(res, error, '/api/sightings/search/eagle');
@@ -124,18 +107,14 @@ app.get('/api/sightings/search/eagle', async (req, res) => {
 app.get('/api/sightings/find-index/moose', async (req, res) => {
     try {
         const sightings = await loadSightings();
-        
-        // Using .findIndex() with arrow function as required
         const mooseIndex = sightings.findIndex(sighting => 
             sighting.species === "Moose"
         );
-        
         const response = {
             index: mooseIndex,
             sighting: mooseIndex !== -1 ? sightings[mooseIndex] : null,
             found: mooseIndex !== -1
         };
-        
         res.json(response);
     } catch (error) {
         handleRouteError(res, error, '/api/sightings/find-index/moose');
@@ -146,16 +125,10 @@ app.get('/api/sightings/find-index/moose', async (req, res) => {
 app.get('/api/sightings/recent', async (req, res) => {
     try {
         const sightings = await loadSightings();
-        
-        // Sort by date (most recent first)
         const sortedSightings = [...sightings].sort((a, b) => 
             new Date(b.date) - new Date(a.date)
         );
-        
-        // Get top 3 most recent
         const recentSightings = sortedSightings.slice(0, 3);
-        
-        // Format response with specific fields only
         const formattedSightings = recentSightings.map(sighting => ({
             species: sighting.species,
             date: sighting.date,
@@ -163,7 +136,6 @@ app.get('/api/sightings/recent', async (req, res) => {
             verified: sighting.verified,
             notes: sighting.notes ? sighting.notes.substring(0, 100) + '...' : ''
         }));
-        
         res.json(formattedSightings);
     } catch (error) {
         handleRouteError(res, error, '/api/sightings/recent');
@@ -197,12 +169,15 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Start the server
-app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
-    console.log(`📄 About page: http://localhost:${PORT}/`);
-    console.log(`🔗 API Base: http://localhost:${PORT}/api/sightings`);
-    console.log(`Press Ctrl+C to stop the server`);
-});
+// Export for Vercel (serverless function)
+module.exports = app;
 
-module.exports = app; // Export for testing purposes
+// For local development only
+if (require.main === module) {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`🚀 Server running on http://localhost:${PORT}`);
+        console.log(`📄 About page: http://localhost:${PORT}/`);
+        console.log(`🔗 API Base: http://localhost:${PORT}/api/sightings`);
+    });
+}
